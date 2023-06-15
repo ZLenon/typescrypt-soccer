@@ -1,4 +1,5 @@
 import * as express from 'express';
+import routerTeams from './router/TeamsRouters'; // Rota de times
 
 class App {
   public app: express.Express;
@@ -10,6 +11,8 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+
+    this.app.use('/teams', routerTeams);// Rota de times
   }
 
   private config():void {
