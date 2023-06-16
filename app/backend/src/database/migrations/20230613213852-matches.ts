@@ -8,12 +8,15 @@ export default {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
       },
       homeTeamId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         field: 'home_team_id',
         allowNull: false,
+        references: {
+          model: 'teams',
+          key: 'id',
+        },
       },
       homeTeamGoals: {
         type: DataTypes.INTEGER,
@@ -21,9 +24,13 @@ export default {
         allowNull: false,
       },
       awayTeamId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         field: 'away_team_id',
         allowNull: false,
+        references: {
+          model: 'teams',
+          key: 'id',
+        },
       },
       awayTeamGoals: {
         type: DataTypes.INTEGER,
