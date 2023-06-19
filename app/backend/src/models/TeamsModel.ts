@@ -1,7 +1,7 @@
 import ModelSequelize from '../database/models/TeamsModel'; // Model de Times
-import { ServiceTeams } from '../Interfaces/interfacesServices';
+import { FuncoesTeams } from '../Interfaces/interfacesServices';
 
-class ModelTeams implements ServiceTeams {
+class ModelTeams implements FuncoesTeams {
   private model = ModelSequelize;
   /* private encrypter: Encrypter,
     private tokenGenerator: TokenGenerator, */

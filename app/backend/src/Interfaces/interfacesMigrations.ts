@@ -20,8 +20,19 @@ interface Iusers {
   password: string
 }
 
+interface ILogin {
+  email: string | undefined,
+  password: string | undefined,
+}
+interface IRole {
+  role: string | undefined,
+  id: number | undefined,
+}
+
 export {
   Iteams,
   Imatches,
   Iusers,
+  ILogin,
+  IRole,
 };

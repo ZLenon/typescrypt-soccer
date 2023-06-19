@@ -1,5 +1,6 @@
 import * as express from 'express';
 import routerTeams from './router/TeamsRouters'; // Rota de times
+import routerUser from './router/UserRouters'; // Rota de usuario
 
 class App {
   public app: express.Express;
@@ -13,6 +14,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
 
     this.app.use('/teams', routerTeams);// Rota de times
+    this.app.use('/login', routerUser);// Rota de usuario
   }
 
   private config():void {
