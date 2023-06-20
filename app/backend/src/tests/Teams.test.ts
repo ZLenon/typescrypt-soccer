@@ -9,13 +9,13 @@ import { time } from '../tests/mock/mokes'
 
 chai.use(chaiHttp);
 
-const { expect } = chai;
+import { expect } from 'chai';
 
 describe('TESTES TEAMS', () => {
 
   afterEach(() => sinon.restore());
 
-  it('Get All', async () => {     
+  it('Testando Buscar todos os Times', async () => {     
     sinon.stub(TeamModel, 'findAll').resolves([time] as TeamModel[]);
 
     const result = await chai.request(app).get('/teams');
@@ -24,7 +24,7 @@ describe('TESTES TEAMS', () => {
     expect(result.body).to.be.deep.equal([time]);
   });
 
-  it('Get by Id', async () => {
+  it('Testando Buscar apenas um Time', async () => {
     const timeModelo = time as TeamModel;
     sinon.stub(TeamModel, 'findOne').resolves(timeModelo);
 

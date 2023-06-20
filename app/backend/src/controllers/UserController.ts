@@ -9,7 +9,9 @@ class ControllerUser {
 
   async findUserController(req: Request, res: Response) {
     const allBody = req.body;
+    // console.log('Controler', req.body);
     const usuario = await this.service.findUserService(allBody);
+
     if (usuario.type === 'CONFLICT') {
       return res.status(400).json(usuario.data);
     }
