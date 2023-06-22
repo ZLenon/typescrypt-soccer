@@ -3,6 +3,7 @@ import TeamsModel from '../database/models/TeamsModel';
 import MatchsModel from '../database/models/MatchsModel';
 import UserModel from '../database/models/UserModel';
 import { ILogin, IRole } from './interfacesMigrations';
+
 // funções genericas
 
 interface FuncoesTeams { // Times
@@ -17,6 +18,7 @@ interface FuncoesLogin { // Usuario
 interface FuncoesMatches { // Partidas
   allMatcherModel(): Promise<MatchsModel[]>,
   findQueryMatcherModel(query: boolean): Promise<MatchsModel[]>,
+  matcherENDModel(id: number): Promise<void>,
 }
 
 interface FuncoesEncrypter { // Bcrypt

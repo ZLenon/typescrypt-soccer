@@ -1,4 +1,4 @@
-type Msg = { message: string };
+export type Msg = { message: string };
 type ErrorType = 'INVALID_DATA' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'CONFLICT';
 type ServiceResError = {
   type: ErrorType,

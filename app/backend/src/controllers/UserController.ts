@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-
 import TokenGeneratorJwt from '../services/jwtService';
 import ServiceUser from '../services/UserService';
 

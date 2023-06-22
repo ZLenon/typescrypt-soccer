@@ -4,7 +4,6 @@ import { FuncoesMatches } from '../Interfaces/interfacesServices';
 
 class ModelMatchs implements FuncoesMatches {
   private modelM = ModelSequelize;
-  private modeT = ModelTimes;
 
   /* private encrypter: Encrypter,
     private tokenGenerator: TokenGenerator, */
@@ -26,6 +25,13 @@ class ModelMatchs implements FuncoesMatches {
       ],
       where: { inProgress: query } });
     return partidaQuery;
+  }
+
+  async matcherENDModel(id: number): Promise<void> {
+    await this.modelM.update(
+      { inProgress: false },
+      { where: { id } },
+    );
   }
 }
 
