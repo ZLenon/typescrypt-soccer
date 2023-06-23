@@ -60,7 +60,7 @@ class ControllerMatchs {
     if (partidaEmProgresso.type === 'NOT_FOUND') {
       return res.status(404).json(partidaEmProgresso.data);
     }
-    return res.status(200).json(partidaEmProgresso.data);
+    return res.status(201).json(partidaEmProgresso.data);
   }
 }
 
