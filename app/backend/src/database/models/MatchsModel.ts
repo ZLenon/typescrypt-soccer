@@ -1,10 +1,9 @@
-import { DataTypes, Model, InferCreationAttributes, InferAttributes,
+import { DataTypes, Model,
 } from 'sequelize';
 import db from '.';
 import TeamModel from './TeamsModel';
 
-class MatchModel extends Model<InferAttributes<MatchModel>,
-InferCreationAttributes<MatchModel>> {
+class MatchModel extends Model {
   id!: number;
   homeTeamId!: number;
   homeTeamGoals!: number;

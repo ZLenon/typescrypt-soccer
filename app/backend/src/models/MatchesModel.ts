@@ -1,11 +1,14 @@
-import { ImatchesUpdate } from '../Interfaces/interfacesMigrations';
+import {
+  IcreatedInProgress,
+  Imatches,
+  ImatchesUpdate,
+} from '../Interfaces/interfacesMigrations';
 import ModelSequelize from '../database/models/MatchsModel'; // Model de Partidas
 import ModelTimes from '../database/models/TeamsModel'; // Model de Times
 import { FuncoesMatches } from '../Interfaces/interfacesServices';
 
 class ModelMatchs implements FuncoesMatches {
   private modelM = ModelSequelize;
-
   /* private encrypter: Encrypter,
     private tokenGenerator: TokenGenerator, */
 
@@ -40,6 +43,14 @@ class ModelMatchs implements FuncoesMatches {
       { homeTeamGoals: partida.homeTeamGoals, awayTeamGoals: partida.awayTeamGoals },
       { where: { id } },
     );
+  }
+
+  async createMathInProgressModel(partida: IcreatedInProgress): Promise<Imatches> {
+    const partidaEmProgresso = await this.modelM.create({
+      ...partida,
+      inProgress: true,
+    });
+    return partidaEmProgresso;
   }
 }
 

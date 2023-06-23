@@ -2,7 +2,8 @@ import { JwtPayload } from 'jsonwebtoken';
 import TeamsModel from '../database/models/TeamsModel';
 import MatchsModel from '../database/models/MatchsModel';
 import UserModel from '../database/models/UserModel';
-import { ILogin, IRole, ImatchesUpdate } from './interfacesMigrations';
+import { ILogin, IRole,
+  IcreatedInProgress, Imatches, ImatchesUpdate } from './interfacesMigrations';
 
 // funções genericas
 
@@ -20,6 +21,7 @@ interface FuncoesMatches { // Partidas
   findQueryMatcherModel(query: boolean): Promise<MatchsModel[]>,
   matcherENDModel(id: number): Promise<void>,
   matcherUpdateModel(id: number, partida: ImatchesUpdate): Promise<void>
+  createMathInProgressModel(partida: IcreatedInProgress): Promise<Imatches>
 }
 
 interface FuncoesEncrypter { // Bcrypt

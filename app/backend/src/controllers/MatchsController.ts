@@ -5,6 +5,7 @@ import MatchsSerice from '../services/MatchsService';
 class ControllerMatchs {
   private service = new MatchsSerice();
   private jwt = new TokenGeneratorJwt();
+  private tokenInvalido = 'Token must be a valid token';
 
   async allMatcherController(req: Request, res: Response) {
     const { inProgress } = req.query;
@@ -27,7 +28,7 @@ class ControllerMatchs {
     const { id } = req.params;
     const isValid = this.jwt.decodeToken(authorization as string);
     if (!isValid) {
-      return res.status(401).json({ message: 'Token must be a valid token' });
+      return res.status(401).json({ message: this.tokenInvalido });
     }
     const partidaFinalizada = await this.service.matcherENDService(Number(id));
     return res.status(200).json(partidaFinalizada);
@@ -39,10 +40,27 @@ class ControllerMatchs {
     const { id } = req.params;
     const isValid = this.jwt.decodeToken(authorization as string);
     if (!isValid) {
-      return res.status(401).json({ message: 'Token must be a valid token' });
+      return res.status(401).json({ message: this.tokenInvalido });
     }
     const placarAtualizado = await this.service.matcherUpdateService(Number(id), placarPartida);
     return res.status(200).json(placarAtualizado);
+  }
+
+  async createMathInProgressController(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    const partida = req.body;
+    const isValid = this.jwt.decodeToken(authorization as string);
+    if (!isValid) {
+      return res.status(401).json({ message: this.tokenInvalido });
+    }
+    const partidaEmProgresso = await this.service.createMathInProgressService(partida);
+    if (partidaEmProgresso.type === 'CONFLICT') {
+      return res.status(422).json(partidaEmProgresso.data);
+    }
+    if (partidaEmProgresso.type === 'NOT_FOUND') {
+      return res.status(404).json(partidaEmProgresso.data);
+    }
+    return res.status(200).json(partidaEmProgresso.data);
   }
 }
 

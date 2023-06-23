@@ -6,6 +6,15 @@ const routerMatchs = Router();
 
 const Ctrl = new ControllerMatchs();
 
+routerMatchs.get(
+  '/',
+  (req: Request, res: Response) => Ctrl.allMatcherController(req, res),
+);
+routerMatchs.post(
+  '/',
+  validToken.validTK,
+  (req: Request, res: Response) => Ctrl.createMathInProgressController(req, res),
+);
 routerMatchs.patch(
   '/:id',
   validToken.validTK,
@@ -16,11 +25,6 @@ routerMatchs.patch(
   '/:id/finish',
   validToken.validTK,
   (req: Request, res: Response) => Ctrl.matcherENDController(req, res),
-);
-
-routerMatchs.get(
-  '/',
-  (req: Request, res: Response) => Ctrl.allMatcherController(req, res),
 );
 
 export default routerMatchs;
