@@ -80,4 +80,37 @@ describe('TESTES USER', () => {
     expect(todasPartidas.status).to.be.equal(200);
     expect(todasPartidas.body).to.be.deep.equal({ homeTeamGoals: 50, awayTeamGoals: 50 });    
   });
+  // -----------------------------------------------------------------------
+  it('Testando a rota criar Partida em andamento caso de SUCESSO', async () => {
+    const DB = DbModel.build({
+      id: 51,
+      homeTeamId: 16,
+      awayTeamId: 11,
+      homeTeamGoals: 2,
+      awayTeamGoals: 2,
+      inProgress: true
+    }) // DB --- findQueryMatcherModel
+    sinon.stub(DbModel, 'create').resolves(DB); // Model --- matcherUpdateModel
+    const TK = jwt.geradorToken({ role: 'visitante', id: 41 });
+    body.req.headers.authorization = TK;  
+    const partidaEmProgresso = await chai.request(app).post('/matches')
+    .set({authorization: TK})
+    .send({
+      homeTeamId: 16, 
+      awayTeamId: 11, 
+      homeTeamGoals: 2,
+      awayTeamGoals: 2
+    });
+    // console.log('TESTE',partidaEmProgresso.body);
+
+    expect(partidaEmProgresso.status).to.be.equal(201);
+    expect(partidaEmProgresso.body).to.be.deep.equal({
+      id: 51,
+      homeTeamId: 16,
+      awayTeamId: 11,
+      homeTeamGoals: 2,
+      awayTeamGoals: 2,
+      inProgress: true
+    });    
+  });
 });
