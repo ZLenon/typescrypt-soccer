@@ -22,8 +22,12 @@ class TokenGeneratorJwt implements FuncoesToken {
   } */
 
   // decodifica a super string em um password
-  decodeToken(token: string): string | jwt.JwtPayload {
-    return this.jwt.verify(token, this.secretKey) as jwt.JwtPayload;
+  decodeToken(token: string): string | jwt.JwtPayload | null {
+    try {
+      return this.jwt.verify(token, this.secretKey) as jwt.JwtPayload;
+    } catch (error) {
+      return null;
+    }
   }
 }
 

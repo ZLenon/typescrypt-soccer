@@ -11,6 +11,10 @@ interface Imatches {
   awayTeamGoals: number,
   inProgress: boolean,
 }
+interface ImatchesUpdate {
+  homeTeamGoals: number,
+  awayTeamGoals: number
+}
 
 interface Iusers {
   id: number,
@@ -35,4 +39,5 @@ export {
   Iusers,
   ILogin,
   IRole,
+  ImatchesUpdate,
 };

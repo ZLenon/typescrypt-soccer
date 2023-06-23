@@ -25,14 +25,24 @@ class ControllerMatchs {
   async matcherENDController(req: Request, res: Response) {
     const { authorization } = req.headers;
     const { id } = req.params;
-    try {
-      this.jwt.decodeToken(authorization as string);
-      const partidaFinalizada = await this.service.matcherENDService(Number(id));
-      return res.status(200).json(partidaFinalizada);
-    } catch (err) {
-      console.error(err);
+    const isValid = this.jwt.decodeToken(authorization as string);
+    if (!isValid) {
       return res.status(401).json({ message: 'Token must be a valid token' });
     }
+    const partidaFinalizada = await this.service.matcherENDService(Number(id));
+    return res.status(200).json(partidaFinalizada);
+  }
+
+  async matcherUpdateController(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    const placarPartida = req.body;
+    const { id } = req.params;
+    const isValid = this.jwt.decodeToken(authorization as string);
+    if (!isValid) {
+      return res.status(401).json({ message: 'Token must be a valid token' });
+    }
+    const placarAtualizado = await this.service.matcherUpdateService(Number(id), placarPartida);
+    return res.status(200).json(placarAtualizado);
   }
 }
 

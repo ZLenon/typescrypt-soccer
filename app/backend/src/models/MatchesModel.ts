@@ -1,3 +1,4 @@
+import { ImatchesUpdate } from '../Interfaces/interfacesMigrations';
 import ModelSequelize from '../database/models/MatchsModel'; // Model de Partidas
 import ModelTimes from '../database/models/TeamsModel'; // Model de Times
 import { FuncoesMatches } from '../Interfaces/interfacesServices';
@@ -30,6 +31,13 @@ class ModelMatchs implements FuncoesMatches {
   async matcherENDModel(id: number): Promise<void> {
     await this.modelM.update(
       { inProgress: false },
+      { where: { id } },
+    );
+  }
+
+  async matcherUpdateModel(id: number, partida: ImatchesUpdate): Promise<void> {
+    await this.modelM.update(
+      { homeTeamGoals: partida.homeTeamGoals, awayTeamGoals: partida.awayTeamGoals },
       { where: { id } },
     );
   }

@@ -2,7 +2,7 @@ import { JwtPayload } from 'jsonwebtoken';
 import TeamsModel from '../database/models/TeamsModel';
 import MatchsModel from '../database/models/MatchsModel';
 import UserModel from '../database/models/UserModel';
-import { ILogin, IRole } from './interfacesMigrations';
+import { ILogin, IRole, ImatchesUpdate } from './interfacesMigrations';
 
 // funções genericas
 
@@ -19,6 +19,7 @@ interface FuncoesMatches { // Partidas
   allMatcherModel(): Promise<MatchsModel[]>,
   findQueryMatcherModel(query: boolean): Promise<MatchsModel[]>,
   matcherENDModel(id: number): Promise<void>,
+  matcherUpdateModel(id: number, partida: ImatchesUpdate): Promise<void>
 }
 
 interface FuncoesEncrypter { // Bcrypt
@@ -29,7 +30,7 @@ interface FuncoesEncrypter { // Bcrypt
 interface FuncoesToken { // JWT
   geradorToken(user: IRole): string
   // validateToken(token: string): boolean
-  decodeToken(token: string):string | JwtPayload
+  decodeToken(token: string):string | JwtPayload | null
 }
 export {
   FuncoesTeams,

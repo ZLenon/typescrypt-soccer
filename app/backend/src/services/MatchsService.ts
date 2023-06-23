@@ -1,4 +1,4 @@
-import { Imatches } from '../Interfaces/interfacesMigrations';
+import { Imatches, ImatchesUpdate } from '../Interfaces/interfacesMigrations';
 import { Msg, ServiceRes } from '../Interfaces/services';
 import MatchsModel from '../models/MatchesModel';
 
@@ -18,6 +18,14 @@ class ServiceMatchs {
   public async matcherENDService(id: number): Promise<Msg> {
     await this.model.matcherENDModel(id);
     return { message: 'Finished' };
+  }
+
+  public async matcherUpdateService(id: number, partida: ImatchesUpdate): Promise<ImatchesUpdate> {
+    await this.model.matcherUpdateModel(id, partida);
+    return {
+      homeTeamGoals: partida.homeTeamGoals,
+      awayTeamGoals: partida.awayTeamGoals,
+    };
   }
 }
 

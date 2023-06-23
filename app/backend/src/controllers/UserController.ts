@@ -22,13 +22,12 @@ class ControllerUser {
 
   findRoleController(req: Request, res: Response) {
     const { authorization } = req.headers;
-    try {
-      const info = this.jwt.decodeToken(authorization as string);
-      return res.status(200).json(info);
-    } catch (err) {
-      console.error(err);
+    const isValid = this.jwt.decodeToken(authorization as string);
+    if (!isValid) {
       return res.status(401).json({ message: 'Token must be a valid token' });
     }
+    const info = this.jwt.decodeToken(authorization as string);
+    return res.status(200).json(info);
   }
 }
 

@@ -6,14 +6,21 @@ const routerMatchs = Router();
 
 const Ctrl = new ControllerMatchs();
 
-routerMatchs.get(
-  '/',
-  (req: Request, res: Response) => Ctrl.allMatcherController(req, res),
+routerMatchs.patch(
+  '/:id',
+  validToken.validTK,
+  (req: Request, res: Response) => Ctrl.matcherUpdateController(req, res),
 );
+
 routerMatchs.patch(
   '/:id/finish',
   validToken.validTK,
   (req: Request, res: Response) => Ctrl.matcherENDController(req, res),
+);
+
+routerMatchs.get(
+  '/',
+  (req: Request, res: Response) => Ctrl.allMatcherController(req, res),
 );
 
 export default routerMatchs;
