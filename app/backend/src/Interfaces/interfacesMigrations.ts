@@ -40,6 +40,19 @@ interface IRole {
   id: number | undefined,
 }
 
+interface ILeaderBoard {
+  name: string,
+  totalPoints: number,
+  totalGames: number,
+  totalVictories: number,
+  totalDraws: number,
+  totalLosses: number,
+  goalsFavor: number,
+  goalsOwn: number,
+  efficiency: number,
+  goalsBalance: number,
+}
+
 export {
   Iteams,
   Imatches,
@@ -48,4 +61,5 @@ export {
   IRole,
   ImatchesUpdate,
   IcreatedInProgress,
+  ILeaderBoard,
 };

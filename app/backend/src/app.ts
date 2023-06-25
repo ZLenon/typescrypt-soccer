@@ -2,6 +2,7 @@ import * as express from 'express';
 import routerTeams from './router/TeamsRouters'; // Rota de times
 import routerUser from './router/UserRouters'; // Rota de usuario
 import routerMatchs from './router/MatchsRouter'; // Rota de partidas
+import routerLeaderboard from './router/LeaderboardRouter'; // Rota de leaderboard
 
 class App {
   public app: express.Express;
@@ -17,6 +18,7 @@ class App {
     this.app.use('/teams', routerTeams);// Rota de times
     this.app.use('/login', routerUser);// Rota de usuario
     this.app.use('/matches', routerMatchs);// Rota de partidas
+    this.app.use('/leaderboard', routerLeaderboard);// Rota de leaderboard
   }
 
   private config():void {
