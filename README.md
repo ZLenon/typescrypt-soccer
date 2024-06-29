@@ -1,4 +1,4 @@
-# Boas-vindas ao repositório do projeto App TFT!
+# Boas-vindas ao repositório do projeto App TFC!
 
 
 <h2><strong> ⚠️ Configurações mínimas para execução do projeto</strong></h2><br />
